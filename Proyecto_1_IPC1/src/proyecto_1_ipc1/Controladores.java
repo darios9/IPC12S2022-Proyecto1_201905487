@@ -81,29 +81,47 @@ public class Controladores {
         }
         return indic;
     }
+
+    public int buscarIndiceCuenta(int id, int indiceCliente) {
+        int a = indiceCliente;
+        int indic = 5;
+        for (int i = 0; i < cliente[a].lista.length; i++) {
+            if (cliente[a].lista[i].getID() == id) {
+                indic = i;
+            } else {
+                if (cliente[a].lista[i].getID() == 0) {
+                }
+
+            }
+        }
+        return indic;
+    }
 //metodo para depositar en la cuenta del cliente
 
     public void depositarCuenta(int cui, double monto, int Nocuenta) {
         int a = buscarIndice(cui);
-
-        if (a < 5) {
-
-            for (int i = 0; i < cliente[a].lista.length; i++) {
-                if (cliente[a].lista[i].getID() == Nocuenta) {
-                    System.out.println(cliente[a].lista[i].getID());
-                    double b = (cliente[a].lista[i].getSaldo() + monto);
-                    cliente[a].lista[i].setSaldo(b);
-                    JOptionPane.showMessageDialog(null, "deposito realizado exitosamente");
-
-                }
-            }
+        int b = Nocuenta - 1;
+        if (b < 5) {
+            double c = cliente[a].lista[b].getSaldo() + monto;
+            cliente[a].lista[b].setSaldo(c);
+            System.out.println(cliente[a].lista[b].getSaldo());
+            JOptionPane.showMessageDialog(null, "el deposito fue realizado exitosamente");
         } else {
-            if (a > 4) {
-                JOptionPane.showMessageDialog(null, "la cuenta no existe",
-                        "Advertencia", JOptionPane.WARNING_MESSAGE);
+            if (b > 4) {
+                JOptionPane.showMessageDialog(null, "la cuenta no existe");
             }
         }
+        /* for (int i = 0; i < cliente[a].lista.length; i++) {
+            if (cliente[a].lista[i].getID() == Nocuenta) {
+                double b = cliente[a].lista[i].getSaldo() + monto;
+                cliente[a].lista[i].setSaldo(b);
+                JOptionPane.showMessageDialog(null, "el deposito es correcto");
+            } else {
+                if (cliente[a].lista[i].getID() != Nocuenta) {
+                }
+            }
 
+        }*/
     }
 
 // imprimir matriz de objetos
