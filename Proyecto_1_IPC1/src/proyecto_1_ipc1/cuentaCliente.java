@@ -11,7 +11,7 @@ public class cuentaCliente {
     public cuentaCliente() {
     }
 
-    public cuentaCliente(int ID, String Cliente, int Saldo) {
+    public cuentaCliente(int ID, double saldo) {
         this.ID = ID;
         this.Saldo = Saldo;
 
@@ -40,10 +40,5 @@ public class cuentaCliente {
     public void setSaldo(double Saldo) {
         this.Saldo = Saldo;
     }
-/*
-    @Override
-    public String toString() {
-        return ID + Cliente  Saldo;
 
-    }*/
 }

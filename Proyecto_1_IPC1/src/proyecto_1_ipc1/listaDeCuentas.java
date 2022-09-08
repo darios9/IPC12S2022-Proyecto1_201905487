@@ -8,10 +8,10 @@ public class listaDeCuentas {
     private int ID;
     int contador = 0;
 
-    public void llenarLista(int ID, String cliente, int saldo) {
+   /* public void llenarLista(int ID, String cliente, int saldo) {
         lista[contador] = new cuentaCliente(ID, cliente, saldo);
         contador++;
-    }
+    }*/
 
     public int generarID() {
         int a;
@@ -19,7 +19,7 @@ public class listaDeCuentas {
         return a;
     }
 
-    public void crearCuenta(String cliente, int saldo) {
+   /* public void crearCuenta(String cliente, int saldo) {
         if (contador < 5) {
             
             llenarLista(generarID(), cliente, saldo);
@@ -31,7 +31,7 @@ public class listaDeCuentas {
             }
         }
 
-    }
+    }*/
 public void iprimirCuenta(){
     for (int i = 0; i < lista.length; i++) {
         System.out.println(lista[i]);

@@ -16,7 +16,7 @@ import proyecto_1_ipc1.Controladores;
 public class informacionCliente extends javax.swing.JFrame {
 
     private JFrame ventana;
-    Controladores control;
+    Controladores control2;
     static DefaultTableModel modeloTablaClientes;
     static DefaultTableModel modeloTablaCuenta;
 
@@ -27,12 +27,12 @@ public class informacionCliente extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         modeloTablaClientes = (DefaultTableModel) jTableClientes.getModel();
-
+        modeloTablaCuenta = (DefaultTableModel) jTableCuentas.getModel();
     }
 
     public informacionCliente(JFrame ventana, Controladores control) {
         this.ventana = ventana;
-        this.control = control;
+        this.control2 = control;
         initComponents();
         modeloTablaClientes = (DefaultTableModel) jTableClientes.getModel();
         modeloTablaCuenta = (DefaultTableModel) jTableCuentas.getModel();
@@ -56,20 +56,50 @@ public class informacionCliente extends javax.swing.JFrame {
 
     public void llenarTabla() {
         int x = 1;
-        for (int i = 0; i < control.cliente.length; i++) {
-            if (control.cliente[i].getCUI() != 0) {
+        for (int i = 0; i < control2.cliente.length; i++) {
+            if (control2.cliente[i].getCUI() != 0) {
                 modeloTablaClientes.setNumRows(x);
-                modeloTablaClientes.setValueAt(control.cliente[i].getCUI(), i, 0);
-                modeloTablaClientes.setValueAt(control.cliente[i].getNombre(), i, 1);
-                modeloTablaClientes.setValueAt(control.cliente[i].getApellido(), i, 2);
+                modeloTablaClientes.setValueAt(control2.cliente[i].getCUI(), i, 0);
+                modeloTablaClientes.setValueAt(control2.cliente[i].getNombre(), i, 1);
+                modeloTablaClientes.setValueAt(control2.cliente[i].getApellido(), i, 2);
                 x++;
             } else {
-                if (control.cliente[i].getCUI() == 0) {
+                if (control2.cliente[i].getCUI() == 0) {
                 }
             }
         }
 
     }
+
+public void llenartablaCuenta(int cui){
+int x = 1;
+int a = control2.buscarIndice(cui);
+ try {
+            if (a < 5) {
+
+            for (int i = 0; i < control2.cliente[a].lista.length; i++) {
+                if (control2.cliente[a].lista[i].getID() != 0) {
+                    //System.out.println(control.cliente[a].lista[i].getID());
+                    modeloTablaCuenta.setNumRows(x);
+                    modeloTablaCuenta.setValueAt(control2.cliente[a].lista[i].getSaldo(), i, 0);
+                    modeloTablaCuenta.setValueAt(control2.cliente[a].lista[i].getID(), i, 1);
+                    x++;
+                } else {
+                    if (control2.cliente[a].lista[i].getID() == 0) {
+
+                    }
+                }
+            }
+        } else {
+            if (a > 4) {
+                JOptionPane.showMessageDialog(null, "la cuenta no existe",
+                        "Advertencia", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        } catch (Exception e) {
+        }
+
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -223,32 +253,9 @@ public class informacionCliente extends javax.swing.JFrame {
 
     private void jButton1BuscarCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1BuscarCuentasActionPerformed
         limpiarDatosTablaCuenta();
-        int x = 1;
-
         int cui = Integer.parseInt(this.jTextFieldCui.getText());
-        int a = control.buscarIndice(cui);
-        if (a < 5) {
-
-            for (int i = 0; i < control.cliente[a].lista.length; i++) {
-                if (control.cliente[a].lista[i].getID() != 0) {
-                    //System.out.println(control.cliente[a].lista[i].getID());
-                    modeloTablaCuenta.setNumRows(x);
-                    modeloTablaCuenta.setValueAt(control.cliente[a].lista[a].getSaldo(), i, 0);
-                    modeloTablaCuenta.setValueAt(control.cliente[a].lista[i].getID(), i, 1);
-                    x++;
-                } else {
-                    if (control.cliente[a].lista[i].getID() == 0) {
-
-                    }
-                }
-            }
-        } else {
-            if (a > 4) {
-                JOptionPane.showMessageDialog(null, "la cuenta no existe",
-                        "Advertencia", JOptionPane.WARNING_MESSAGE);
-            }
-        }
-
+        llenartablaCuenta(cui);
+        
         this.jTextFieldCui.setText("");
     }//GEN-LAST:event_jButton1BuscarCuentasActionPerformed
 
