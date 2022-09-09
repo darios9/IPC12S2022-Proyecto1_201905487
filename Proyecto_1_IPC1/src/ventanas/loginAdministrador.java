@@ -4,6 +4,7 @@
  */
 package ventanas;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,11 +13,22 @@ import javax.swing.JOptionPane;
  */
 public class loginAdministrador extends javax.swing.JFrame {
 
+    private JFrame ventana;
+
     /**
      * Creates new form loginAdministrador
      */
     public loginAdministrador() {
         initComponents();
+        this.setLocationRelativeTo(null);
+    }
+
+    public loginAdministrador(JFrame ventana) {
+        this.ventana = ventana;
+        initComponents();
+        this.repaint();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     /**
@@ -122,8 +134,10 @@ public class loginAdministrador extends javax.swing.JFrame {
         if (usuario.equals("admin") && password.equals("201905487")) {
             loginAdministrador obj = new loginAdministrador();
             JOptionPane.showMessageDialog(null, "Bienvenido Administrador");
-            
+
             this.setVisible(false);
+            MenuPrincipal nue = new MenuPrincipal();
+            nue.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "El usuario o Password son incorrecto");
             this.setVisible(true);
@@ -132,10 +146,14 @@ public class loginAdministrador extends javax.swing.JFrame {
         jTextFieldUsuario.setText("");
         jPasswordField.setText("");
 
+
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
     private void jButtonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIngresarActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        dispose();
+        ventana.setVisible(true);
     }//GEN-LAST:event_jButtonIngresarActionPerformed
 
     /**

@@ -117,6 +117,38 @@ public class Controladores {
         }
     }
 
+public void realizarTranasaccion(double monto, int cuiOrigen, int cuiDestino, int idOrig, int idDestino){
+int indcOri = buscarIndice(cuiOrigen);
+int indcDes = buscarIndice(cuiDestino);
+int a = idOrig - 1;
+        if (monto > 0) {
+            if (cuiOrigen == cuiDestino) {
+                if (cliente[indcOri].lista[a].getSaldo() > monto) {
+                    cliente[indcOri].devitar(idOrig, monto);
+                    cliente[indcDes].diposito(idDestino, monto);
+                    JOptionPane.showMessageDialog(null, "tansferencia realizada exitosamente");
+                } else {
+                    if (cliente[indcOri].lista[a].getSaldo() < monto) {
+                        JOptionPane.showMessageDialog(null, "la cuenta de origen no tiene sufiseent saldo ",
+                                "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+            } else {
+                if (cuiOrigen != cuiDestino) {
+                    JOptionPane.showMessageDialog(null, "las cuentas de origen y destino deben ser distintos",
+                            "Advertencia", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+
+        } else {
+            if (monto < 0) {
+                JOptionPane.showMessageDialog(null, "el deposito debe se mayor a 0",
+                        "Advertencia", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+
+}
+
 // imprimir matriz de objetos
     public void imprimir() {
         for (int i = 0; i < cliente.length; i++) {
